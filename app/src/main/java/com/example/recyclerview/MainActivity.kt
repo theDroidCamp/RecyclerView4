@@ -3,6 +3,7 @@ package com.example.recyclerview
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,13 +21,15 @@ class MainActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Movies>>, response: Response<List<Movies>>) {
                 val screen = response.body()
                 screen?.let{
-                   // showMovies(it)
+                    showMovies(it)
                 }
 
             }
 
         })
     }
-    ///function showmovies has not been created
+      private fun showMovies(movies: List<Movies>) {
+          recycler_view.layoutManager = LinearLayoutManager(this)
+          recycler_view.adapter= MoviesRecyclerAdapter(movies)
     }
 }
